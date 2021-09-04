@@ -23,7 +23,7 @@ pipeline {
             steps {
                 unstash name: 'targetFileAndDockerFile'
                 sh 'docker build -t prithuadhikary/docker-demo:1.2 .'
-                sh 'echo $DOCKER_HUB_CREDS_PWD | docker login -u $DOCKER_HUB_CREDS_USR --password-stdin'
+                sh 'echo $DOCKER_HUB_CREDS_PSW | docker login -u $DOCKER_HUB_CREDS_USR --password-stdin'
                 sh 'docker push prithuadhikary/docker-demo:1.2'
                 sh 'docker logout'
 
