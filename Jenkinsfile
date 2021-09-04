@@ -19,7 +19,7 @@ pipeline {
             steps {
                 unstash name: 'targetFileAndDockerFile'
                 sh 'docker build -t prithuadhikary/docker-demo .'
-                sh 'docker stack deploy -c docker-compose.yaml'
+                sh 'docker stack deploy -c docker-compose.yaml opabs'
             }
         }
     }
