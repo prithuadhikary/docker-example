@@ -5,3 +5,8 @@ services:
     image: prithuadhikary/docker-demo:latest
     ports:
       - 80:8080
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
