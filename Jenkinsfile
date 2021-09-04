@@ -26,6 +26,17 @@ pipeline {
                 sh 'echo $DOCKER_HUB_CREDS_PWD | docker login -u $DOCKER_HUB_CREDS_USR --password-stdin'
                 sh 'docker push prithuadhikary/docker-demo:1.2'
                 sh 'docker logout'
+
+                stash includes: 'docker-compose.yaml', name: 'dockerComposeFile'
+            }
+        }
+        stage("Deploy To Swarm") {
+            agent {
+                label 'docker'
+            }
+            steps {
+                unstash name: 'dockerComposeFile'
+                sh 'docker stack deploy -c docker-compose.yaml opabs'
             }
         }
     }
