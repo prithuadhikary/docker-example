@@ -6,6 +6,7 @@ pipeline {
     stages {
         stage("Build Project") {
             steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/prithuadhikary/docker-example.git']]])
                 withMaven(maven: 'maven_3_8_2') {
                     sh 'mvn clean package'
                 }
