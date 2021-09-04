@@ -2,6 +2,9 @@ pipeline {
     agent {
         label 'slaves'
     }
+    environment {
+        DOCKER_HUB_CREDS = credentials('docker-hub-token')
+    }
 
     stages {
         stage("Build Project") {
@@ -20,7 +23,9 @@ pipeline {
             steps {
                 unstash name: 'targetFileAndDockerFile'
                 sh 'docker build -t prithuadhikary/docker-demo:1.2 .'
-                sh 'docker stack deploy -c docker-compose.yaml opabs'
+                sh 'echo $DOCKER_HUB_CREDS_PWD | docker login -u $DOCKER_HUB_CREDS_USR --password-stdin'
+                sh 'docker push prithuadhikary/docker-demo:1.2'
+                sh 'docker logout'
             }
         }
     }
