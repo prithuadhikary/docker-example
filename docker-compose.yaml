@@ -10,6 +10,8 @@ services:
       - frontend
     environment:
       SPRING_PROFILES_ACTIVE: devcloud
+    depends_on:
+      - db
     deploy:
       replicas: 3
 
