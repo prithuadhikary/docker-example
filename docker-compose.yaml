@@ -6,9 +6,27 @@ services:
     ports:
       - 80:8080
     networks:
-      - mynetwork
+      - backend
+      - frontend
     deploy:
       replicas: 3
 
+  db:
+    image: postgres:13.4-alpine
+    networks:
+      - backend
+    environment:
+      POSTGRES_DB: opabs
+      POSTGRES_USER: opabs
+      POSTGRES_PASSWORD: Jotujanta12#
+    deploy:
+      replicas: 1
+
 networks:
-  mynetwork:
+  backend:
+    driver: overlay
+  frontend:
+    driver: overlay
+
+volumes:
+  db-data:
