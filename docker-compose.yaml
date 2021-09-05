@@ -8,6 +8,8 @@ services:
     networks:
       - backend
       - frontend
+    environment:
+      SPRING_PROFILES_ACTIVE: devcloud
     deploy:
       replicas: 3
 
