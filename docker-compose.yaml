@@ -23,6 +23,8 @@ services:
       POSTGRES_DB: opabs
       POSTGRES_USER: opabs
       POSTGRES_PASSWORD: Jotujanta12#
+    volumes:
+      - db-data:/var/lib/postgresql/data
     deploy:
       replicas: 1
 
